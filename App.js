@@ -10,10 +10,10 @@ export default function App() {
 
 
   if(!ready) {
-    <AppLoading
-    onError={e=> console.log(e)}
-    onFinish={()=> setReady(true)}
+    return <AppLoading
     startAsync={boot}
+    onError={console.log('222')}
+    onFinish={()=> setReady(true)}
      />
   }
 
@@ -29,8 +29,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  text: {
-    fontSize: 40
   }
 });

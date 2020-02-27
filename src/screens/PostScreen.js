@@ -1,22 +1,33 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { DATA } from '../data';
 
-export const PostScreen = ({})=> {
+export const PostScreen = ({route})=> {
+  const {itemId} = route.params
+  const post = DATA.find(p=>p.id===itemId)
+  console.log(post)
     return (
-    <View style={styles.container}>
-      <Text>Open up</Text>
+    <View>
+      <Image source={{uri:post.img}} style={styles.img} />
+      <View style={styles.text}>
+        <Text >
+          {post.text}
+        </Text>
+      </View>
+      <Button title='Удалить' onPress={()=>console.log('111')} />
+    
     </View>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
+    img: {
+      width: '100%',
+      height: 200
     },
     text: {
-      fontSize: 40
-    }
+      paddingVertical: 5,
+      alignItems: 'center',
+      width: '100%'
+  }
   });

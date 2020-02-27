@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export const BookmarkScreen = ({})=> {
     return (
     <View style={styles.container}>
-      <Text>Open up</Text>
+      <Text>BookmarkScreen</Text>
     </View>
     )
 }
