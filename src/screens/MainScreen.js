@@ -9,11 +9,9 @@ export const MainScreen = ({ navigation })=> {
   const openPost =(post)=> {
     navigation.navigate('PostScreen', {
       itemId: post.id,
-      date: post.date
+      date: post.date,
+      booked: post.booked
     })
-
-
-
   }
     return (
     <View style={styles.container}>

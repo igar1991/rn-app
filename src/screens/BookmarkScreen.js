@@ -1,22 +1,30 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
+import { DATA} from '../data';
+import { Post } from '../components/post';
 
-export const BookmarkScreen = ({})=> {
+export const BookmarkScreen = ({ navigation })=> {
+
+  const openPost =(post)=> {
+    navigation.navigate('PostScreen', {
+      itemId: post.id,
+      date: post.date,
+      booked: post.booked
+    })
+  }
     return (
     <View style={styles.container}>
-      <Text>BookmarkScreen</Text>
+      <FlatList data = {DATA.filter(post=>post.booked)} keyExtractor={post=>post.id.toString()} renderItem = {({item})=><Post post = {item} openPost={openPost} />}/>
     </View>
     )
 }
 
+
+
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    text: {
-      fontSize: 40
+    
     }
+    
   });
