@@ -2,7 +2,9 @@ import React, { useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { AppLoading } from 'expo';
 import { boot } from './src/boot';
-import { AppNavigation, BookedNavigation, AllNavigation  } from './src/navigation/AppNavigation';
+import {Provider} from 'react-redux';
+import { AppNavigation, BookedNavigation, AllNavigation, Drowwer  } from './src/navigation/AppNavigation';
+import store from './src/redux/index'
 
 
 export default function App() {
@@ -19,7 +21,9 @@ export default function App() {
   }
 
   return (
-    <AllNavigation />
+    <Provider store={store}>
+    <Drowwer />
+    </Provider>
   )
   
 }

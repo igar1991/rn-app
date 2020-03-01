@@ -7,6 +7,7 @@ import { AboutScreen } from '../screens/AboutScreen'
 import { BookmarkScreen } from '../screens/BookmarkScreen'
 import { CreateScreen } from '../screens/CreateScreen'
 import { THEME } from '../theme'
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { MaterialHeader } from '../components/MaterialHeader'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -15,8 +16,65 @@ import { Ionicons } from '@expo/vector-icons'
 
 const Stack = createStackNavigator();
 const Booked = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
-export const AppNavigation =()=> {
+export const Drowwer = ()=> {
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="Главная">
+        <Drawer.Screen name="Главная" component={AllNavigation} />
+        <Drawer.Screen name="Избранное" component={BookedNavigation} />
+        <Drawer.Screen name="О нас" component={AboutScreenNavigation} />
+        <Drawer.Screen name="Создать публикацию" component={CreateScreenNavigation} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+}
+
+const CreateScreenNavigation =({navigation})=> {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Создать" component={CreateScreen} options={{
+        title: 'Создать',
+        headerStyle: {
+          backgroundColor: THEME.DANGER
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+        headerLeft: () => (
+          <HeaderButtons HeaderButtonComponent={MaterialHeader}>
+            <Item title="search" iconName="ios-menu" onPress={() => navigation.openDrawer()} />
+          </HeaderButtons>
+        )
+      }} />
+    </Stack.Navigator>
+  )
+}
+const AboutScreenNavigation=({navigation})=> {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="О нас" component={AboutScreen} options={{
+        title: 'О нас',
+        headerStyle: {
+          backgroundColor: THEME.DANGER
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+        headerLeft: () => (
+          <HeaderButtons HeaderButtonComponent={MaterialHeader}>
+            <Item title="search" iconName="ios-menu" onPress={() => navigation.openDrawer()} />
+          </HeaderButtons>
+        )
+      }} />
+    </Stack.Navigator>
+  )
+}
+
+export const AppNavigation =({navigation})=> {
 return (
       <Stack.Navigator initialRouteName="MainScreen" screenOptions={{
         headerStyle: {
@@ -34,12 +92,12 @@ return (
         },
         headerRight: () => (
           <HeaderButtons HeaderButtonComponent={MaterialHeader}>
-            <Item title="search" iconName="ios-camera" onPress={() => alert(MaterialHeader)} />
+            <Item title="search" iconName="ios-camera" onPress={() => navigation.navigate('Create')} />
           </HeaderButtons>
         ),
         headerLeft: () => (
           <HeaderButtons HeaderButtonComponent={MaterialHeader}>
-            <Item title="search" iconName="ios-menu" onPress={() => alert('search')} />
+            <Item title="search" iconName="ios-menu" onPress={() => navigation.openDrawer()} />
           </HeaderButtons>
         )
       }} /> 
@@ -51,12 +109,12 @@ return (
           </HeaderButtons>
         )
         })} />
-      <Stack.Screen name="BookmarkScreen" component={BookmarkScreen} />
+        <Stack.Screen name="Create" component={CreateScreen} />
       </Stack.Navigator>
 )
 } 
 
-export const BookedNavigation =()=> {
+export const BookedNavigation =({navigation})=> {
   return (
         <Booked.Navigator initialRouteName="BookmarkScreen" screenOptions={{
           headerStyle: {
@@ -74,7 +132,7 @@ export const BookedNavigation =()=> {
           },
           headerLeft: () => (
             <HeaderButtons HeaderButtonComponent={MaterialHeader}>
-              <Item title="search" iconName="ios-menu" onPress={() => alert('search')} />
+              <Item title="search" iconName="ios-menu" onPress={() => navigation.openDrawer()} />
             </HeaderButtons>
           )
         }} /> 
@@ -94,7 +152,7 @@ export const BookedNavigation =()=> {
 
   export const AllNavigation=()=> {
     return (
-      <NavigationContainer>
+      
         <Tab.Navigator screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
@@ -117,6 +175,7 @@ export const BookedNavigation =()=> {
           <Tab.Screen name="Main" component={AppNavigation} />
           <Tab.Screen name="Book" component={BookedNavigation} />
         </Tab.Navigator>
-      </NavigationContainer>
     );
   }
+
+ 
