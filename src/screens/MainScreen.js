@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import { DATA} from '../data';
 import { Post } from '../components/post';
+import { useDispatch, useSelector } from 'react-redux';
+import { postAction } from '../redux/actions/postAction';
 
 export const MainScreen = ({ navigation })=> {
 
@@ -13,9 +14,18 @@ export const MainScreen = ({ navigation })=> {
       booked: post.booked
     })
   }
+
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    dispatch(postAction())
+
+  },[dispatch])
+
+  const allPosts = useSelector(state=> state.post.allPost)
     return (
     <View style={styles.container}>
-      <FlatList data = {DATA} keyExtractor={post=>post.id.toString()} renderItem = {({item})=><Post post = {item} openPost={openPost} />}/>
+      <FlatList data = {allPosts} keyExtractor={post=>post.id.toString()} renderItem = {({item})=><Post post = {item} openPost={openPost} />}/>
     </View>
     )
 }

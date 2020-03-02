@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import { DATA } from '../data';
+import { useDispatch } from 'react-redux';
+import { tooggleHandler } from '../redux/actions/postAction';
 
-export const PostScreen = ({route})=> {
-  const {itemId} = route.params
+export const PostScreen = ({route, navigation})=> {
+  const { itemId } = route.params
   const post = DATA.find(p=>p.id===itemId)
-  console.log(post)
+
+  const dispatch = useDispatch()
+
+
+  useEffect(()=> {
+    navigation.setParams({tooggle: dispatch(tooggleHandler(itemId))})
+  },[])
     return (
     <View>
       <Image source={{uri:post.img}} style={styles.img} />
@@ -14,7 +22,8 @@ export const PostScreen = ({route})=> {
           {post.text}
         </Text>
       </View>
-      <Button title='Удалить' onPress={()=>console.log('111')} />
+      <Button title='Удалить' onPress={()=>navigation.setParams({rrrr: 1})} />
+      <Button title='Удалить' onPress={()=>console.log(route)} />
     
     </View>
     )

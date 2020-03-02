@@ -105,7 +105,7 @@ return (
         title: new Date(route.params.date).toLocaleDateString(),
         headerRight: () => (
           <HeaderButtons HeaderButtonComponent={MaterialHeader}>
-            <Item title="search" iconName={route.params.booked ? "ios-star" : "ios-star-outline"} onPress={() => alert(route.params.booked)} />
+            <Item title="search" iconName={route.params.booked ? "ios-star" : "ios-star-outline"} onPress={() => console.log("1111")} />
           </HeaderButtons>
         )
         })} />

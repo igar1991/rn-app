@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import { DATA} from '../data';
 import { Post } from '../components/post';
+import { useSelector } from 'react-redux';
 
 export const BookmarkScreen = ({ navigation })=> {
 
@@ -13,9 +13,11 @@ export const BookmarkScreen = ({ navigation })=> {
       booked: post.booked
     })
   }
+
+  const allBooked = useSelector(state=>state.post.bookedPost)
     return (
     <View style={styles.container}>
-      <FlatList data = {DATA.filter(post=>post.booked)} keyExtractor={post=>post.id.toString()} renderItem = {({item})=><Post post = {item} openPost={openPost} />}/>
+      <FlatList data = {allBooked} keyExtractor={post=>post.id.toString()} renderItem = {({item})=><Post post = {item} openPost={openPost} />}/>
     </View>
     )
 }
