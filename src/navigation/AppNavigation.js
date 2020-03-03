@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { MainScreen } from '../screens/MainScreen'
@@ -12,6 +12,7 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { MaterialHeader } from '../components/MaterialHeader'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons'
+import { useDispatch } from 'react-redux';
 
 
 const Stack = createStackNavigator();
@@ -75,6 +76,7 @@ const AboutScreenNavigation=({navigation})=> {
 }
 
 export const AppNavigation =({navigation})=> {
+
 return (
       <Stack.Navigator initialRouteName="MainScreen" screenOptions={{
         headerStyle: {
@@ -105,7 +107,7 @@ return (
         title: new Date(route.params.date).toLocaleDateString(),
         headerRight: () => (
           <HeaderButtons HeaderButtonComponent={MaterialHeader}>
-            <Item title="search" iconName={route.params.booked ? "ios-star" : "ios-star-outline"} onPress={() => console.log("1111")} />
+            <Item title="search" iconName={route.params.booked ? "ios-star" : "ios-star-outline"} onPress={() => route.params.toogleHandler()} />
           </HeaderButtons>
         )
         })} />
@@ -140,7 +142,7 @@ export const BookedNavigation =({navigation})=> {
           title: new Date(route.params.date).toLocaleDateString(),
           headerRight: () => (
             <HeaderButtons HeaderButtonComponent={MaterialHeader}>
-              <Item title="search" iconName={route.params.booked ? "ios-star" : "ios-star-outline"} onPress={() => alert(route.params.booked)} />
+              <Item title="search" iconName={route.params.booked ? "ios-star" : "ios-star-outline"} onPress={()=> route.params.toogleHandler()} />
             </HeaderButtons>
           )
           })} />

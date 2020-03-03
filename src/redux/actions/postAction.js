@@ -1,4 +1,4 @@
-import { UPLOAD_POST, TOOGLE_POST } from "../type"
+import { UPLOAD_POST, TOOGLE_POST, REMOVE_POST } from "../type"
 import { DATA } from "../../data"
 
 export const postAction=()=> {
@@ -11,6 +11,13 @@ export const postAction=()=> {
 export const tooggleHandler =(id)=> {
     return {
         type: TOOGLE_POST,
+        payload: id
+    }
+}
+
+export const removePost =(id)=> {
+    return {
+        type: REMOVE_POST,
         payload: id
     }
 }
