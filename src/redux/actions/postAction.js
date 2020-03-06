@@ -1,4 +1,4 @@
-import { UPLOAD_POST, TOOGLE_POST, REMOVE_POST } from "../type"
+import { UPLOAD_POST, TOOGLE_POST, REMOVE_POST, ADD_POST } from "../type"
 import { DATA } from "../../data"
 
 export const postAction=()=> {
@@ -21,3 +21,11 @@ export const removePost =(id)=> {
         payload: id
     }
 }
+
+export const addPost =(post)=> {
+    return {
+        type: ADD_POST,
+        payload: post
+    }
+}
+

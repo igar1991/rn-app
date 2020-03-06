@@ -1,4 +1,4 @@
-import { UPLOAD_POST, TOOGLE_POST,REMOVE_POST } from "./type"
+import { UPLOAD_POST, TOOGLE_POST,REMOVE_POST, ADD_POST } from "./type"
 
 const initialState = {
     allPost: [],
@@ -23,6 +23,10 @@ export const postReduser = (state=initialState, action)=> {
         case REMOVE_POST: return {
             ...state, allPost: state.allPost.filter(p=> p.id !== action.payload), bookedPost: state.bookedPost.filter(p=> p.id !== action.payload) 
         }
+        case ADD_POST:
+            return {
+             ...state, allPost: [{...action.payload},...state.allPost]
+            }
         default: return state
     }  
 
